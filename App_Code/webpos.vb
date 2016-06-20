@@ -1311,6 +1311,16 @@ Public Class webpos
         Return SqlHelper.ExecuteScalar(con, CommandType.Text, "SELECT paidby FROM POS_Delivery_CusOrdList WHERE bID=" + cBranchID + " and OrderID=" + OrderId + " and CustomerID=" + CustID + ";")
     End Function
 
+    <WebMethod()> _
+    Function SearchItem(ByVal cBranchID As String, ByVal Value As String) As String
+        sqlConSB.ConnectionString = GetSelectedBranchDBStr(cBranchID)
+
+        Dim _strSQL = String.Format("select top 20 GroupID, SalesItemID, MenuDescription from View_Web_Itemdisplay where Description like '%" & Value & "%' or PriceMode1 like '%" & Value & "%' or MenuDescription like '%" & Value & "%' or PriceMode2 like '%" & Value & "%' order by Description;")
+
+        Return ConvertData2Json(SqlHelper.ExecuteDataset(sqlConSB, CommandType.Text, _strSQL).Tables(0))
+    End Function
+
+
 #End Region
 
 #Region "Admin Panel"

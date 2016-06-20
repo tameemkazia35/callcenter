@@ -37,7 +37,7 @@ $(document).ready(function () {
         });
 
         webpos.GetPaidByType(_cBranchID, localStorage.getItem("orderId"), localStorage.getItem("cCustID"), function (response) {
-            if (response == null) {
+            if (response == null || response.trim().length === 0) {
                 $("#ddlPayType").val("CASH DHS");
             }else if (response.length > 0)
                 $("#ddlPayType").val(response);
@@ -980,3 +980,66 @@ $(document).on(clickOrtouchend, "#openFunction .numpad-list li", function () {
     }
 
 });
+
+/*
+$('#searchItems').typeahead({
+    source: function (query, process) {
+        states = [];
+        map = {};
+
+        var data = [
+        { "stateCode": "CA", "stateName": "California" },
+        { "stateCode": "AZ", "stateName": "Arizona" },
+        { "stateCode": "NY", "stateName": "New York" },
+        { "stateCode": "NV", "stateName": "Nevada" },
+        { "stateCode": "OH", "stateName": "Ohio" }
+    ];
+
+        $.each(data, function (i, state) {
+            map[state.stateName] = state;
+            states.push(state.stateName);
+        });
+
+        process(states);
+    },
+    afterSelect: function (item) {
+        console.log(map[item].stateCode);
+    }
+});
+*/
+
+$('#searchItems').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1,
+    source: function (request, response) {
+        webpos.SearchItem(localStorage.getItem("cBranchID"), request, function (data) {
+             menuItems = [];
+             items = {};
+             _data = JSON.parse(data);
+             $.each(_data, function (i, _item) {
+                items[_item.MenuDescription] = _item;
+                menuItems.push(_item.MenuDescription);
+            });
+            response(menuItems);
+        }, function (data) {
+            console.log(data);
+        });
+    },
+    afterSelect: function (item) {
+        
+        $('a[data-newitemid="' + items[item].GroupID + '"]').click();
+        var _called = true;
+        $(document).ajaxComplete(function () {
+            if (_called) {
+                $('a[data-groupid="' + items[item].GroupID + '"][data-itemid="' + items[item].SalesItemID + '"]').click();
+                $('#searchItems').val('');
+                _called = false;
+                $('#btnMainScreen').click();
+            }
+        });
+    }
+});
+
+
+

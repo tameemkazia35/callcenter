@@ -27,8 +27,7 @@ webpos.GetAllBranches(function (response) {
     $.each(_data, function (i, b) {
         var _strHTML = "";
         _strHTML += "<div class='row branch list-group-item' data-ip='" + b.bIP + "' data-bcode='" + b.bCode + "' data-bid='" + b.bID + "'>";
-        _strHTML += "<div class='col-md-1'><input type='radio' name='rdBranch' /></div>";
-        _strHTML += "<div class='col-md-7 text-uppercase'>" + b.bName + "</div>";
+        _strHTML += "<div class='col-md-8'><label><input type='radio' name='rdBranch' class='text-uppercase' />" + b.bName + "</label></div>";
         _strHTML += "<div class='col-md-3'>";
         _strHTML += "<span class='branch-status alert-danger fa fa-circle-o-notch fa-spin'></span> <a href='#' class='btn-ping' title='PING - " + b.bIP + "'><i class='fa fa-rotate-left'></i></a>";
         _strHTML += "</div>";
@@ -126,21 +125,37 @@ $(document).on("click", "#btnTakeOrder", function (e) {
 
     /* First Check Branch */
     if ($("[name='rdBranch']:checked").length > 0) {
-
-        fnSaveCustInfo();
-        $(".preloader").fadeIn();
-        webpos.SaveCustomerInfo(customerInfo, function (res) {
-
+        var _flag = true;
+        var _custID = $("#hfCustID").val();
+        if ($("#mobileno").val().replace("|", "").trim().length === 0) {
+            _flag = false;
+            bootbox.alert("Please enter mobile number", function () { setTimeout(function () { $("#mobileno").focus(); }, 800); });
+        } else if (_custID.length === 0) {
+            _flag = false;
+            bootbox.alert("Please enter customer name", function () { setTimeout(function () { $("#firstname").focus(); }, 800); });
+        }
+        
+        if (_flag) {
+            $("#mobileno").val($("#mobileno").val().replace("|", "").trim());
+            fnSaveCustInfo();
+            $(".preloader").fadeIn();
+            webpos.SaveCustomerInfo(customerInfo, function (res) {
+        
             $("#hfCustID").val(res.split(":")[0]);
             localStorage.setItem("CustID", res.split(":")[1]);
-            localStorage.setItem("cCustID", res.split(":")[0]);
-
-            fnCreateNewOrder();
-
-        }, function (res) {
-            bootbox.alert(res);
-            $(".preloader").fadeOut();
-        });
+        
+                $("#hfCustID").val(res.split(":")[0]);
+                localStorage.setItem("CustID", res.split(":")[1]);
+                localStorage.setItem("cCustID", res.split(":")[0]);
+        
+        
+                fnCreateNewOrder();
+        
+            }, function (res) {
+                bootbox.alert(res);
+                $(".preloader").fadeOut();
+            });
+        }
 
     } else {
         bootbox.alert("Please select Branch!");
@@ -219,6 +234,8 @@ $(document).on('keypress paste','[id*=mobileno], [id*=homephone], [id*=officepho
     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57))
         return false;
 });
+
+
 
 $('[id*=mobileno]').typeahead({
     hint: true,

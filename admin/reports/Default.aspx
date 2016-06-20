@@ -136,7 +136,7 @@
         function fnBindTableData(_tbdData) {
 
             $("#branches tr").remove();
-            var tableHeader = '<tr><th>Branch Name</th><th>Order</th><th>Customer</th><th class="text-right"></th><th>Driver Name</th><th>Delivery Status</th><th>Paid by</th></tr>';
+            var tableHeader = '<tr><th>Branch Name</th><th>Order</th><th>Customer</th><th class="text-right">Amount</th><th>Driver Name</th><th>Delivery Status</th><th>Paid by</th></tr>';
             $("#branches").append(tableHeader);
             var counter = 0;
             var sum = 0;
@@ -156,9 +156,9 @@
                 $("#branches").append(strHTML);
             });
 
-//            var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="2"></td></tr>';
-//            tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="2"></td></tr>';
-//            $("#branches").append(tFooter);
+           var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="2"></td></tr>';
+           tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="2"></td></tr>';
+           $("#branches").append(tFooter);
 
         }
 
