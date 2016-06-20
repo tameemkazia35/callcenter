@@ -1,6 +1,4 @@
-﻿var dataToGetExcel;
-
-$(".empName").text(localStorage.getItem("EmployeeName"));
+﻿$(".empName").text(localStorage.getItem("EmployeeName"));
 
 $(document).ready(function () {
     $('#deliveryDatetime').datetimepicker({
@@ -27,8 +25,8 @@ webpos.GetAllBranches(function (response) {
     $.each(_data, function (i, b) {
         var _strHTML = "";
         _strHTML += "<div class='row branch list-group-item' data-ip='" + b.bIP + "' data-bcode='" + b.bCode + "' data-bid='" + b.bID + "'>";
-        _strHTML += "<div class='col-md-1'><input type='radio' name='rdBranch' /></div>";
-        _strHTML += "<div class='col-md-7 text-uppercase'>" + b.bName + "</div>";
+        _strHTML += "<div class='col-md-8'><label><input type='radio' name='rdBranch' class='text-uppercase' />" + b.bName + "</label></div>";
+       // _strHTML += "<div class='col-md-7 text-uppercase'>" + b.bName + "</div>";
         _strHTML += "<div class='col-md-3'>";
         _strHTML += "<span class='branch-status alert-danger fa fa-circle-o-notch fa-spin'></span> <a href='#' class='btn-ping' title='PING - " + b.bIP + "'><i class='fa fa-rotate-left'></i></a>";
         _strHTML += "</div>";
@@ -117,30 +115,39 @@ $(document).on("change", ".branch input[name='rdBranch']", function () {
 
 });
 
-$(document).on("click", "#btnSaveCustInfo", function (e) {
-    $("form[name='formUser']").submit();
-});
-
 $(document).on("click", "#btnTakeOrder", function (e) {
     e.preventDefault();
 
     /* First Check Branch */
     if ($("[name='rdBranch']:checked").length > 0) {
+        var _flag = true;
+        var _custID = $("#hfCustID").val();
+        if ($("#mobileno").val().replace("|", "").trim().length === 0) {
+            _flag = false;
+            bootbox.alert("Please enter mobile number", function () { setTimeout(function () { $("#mobileno").focus(); }, 800); });
+        } else if (_custID.length === 0) {
+            _flag = false;
+            bootbox.alert("Please enter customer name", function () { setTimeout(function () { $("#firstname").focus(); }, 800); });
+        }
 
-        fnSaveCustInfo();
-        $(".preloader").fadeIn();
-        webpos.SaveCustomerInfo(customerInfo, function (res) {
+        if (_flag) {
+            $("#mobileno").val($("#mobileno").val().replace("|", "").trim());
+            fnSaveCustInfo();
+            $(".preloader").fadeIn();
+            webpos.SaveCustomerInfo(customerInfo, function (res) {
 
-            $("#hfCustID").val(res.split(":")[0]);
-            localStorage.setItem("CustID", res.split(":")[1]);
-            localStorage.setItem("cCustID", res.split(":")[0]);
+                $("#hfCustID").val(res.split(":")[0]);
+                localStorage.setItem("CustID", res.split(":")[1]);
+                localStorage.setItem("cCustID", res.split(":")[0]);
 
-            fnCreateNewOrder();
+                fnCreateNewOrder();
 
-        }, function (res) {
-            bootbox.alert(res);
-            $(".preloader").fadeOut();
-        });
+            }, function (res) {
+                bootbox.alert(res);
+                $(".preloader").fadeOut();
+            });
+        }
+
 
     } else {
         bootbox.alert("Please select Branch!");
@@ -194,7 +201,9 @@ function fnCreateNewOrder() {
                         console.log(res);
                     });
                 }
-            });
+            }); 
+           
+
             
         } else {
             //Create new order - 20001 - Series
@@ -279,7 +288,7 @@ function fnLoadCustomerInfo(item, type, bName) {
     webpos.GetUserInfoByNumber(type, item, bName, function (response) {
 
         var _data = JSON.parse(response);
-
+        console.log(_data);
         if (_data.length > 0) {
             var cust = _data[0];
             $("#hfCustID").val(cust.custID);
@@ -459,7 +468,6 @@ function fnLoad() {
     }
     webpos.apGetOrders(whereClause, function (res) {
         _data = JSON.parse(res);
-        dataToGetExcel = _data;
         fnBindTableData(_data);
 
     }, function (res) {
@@ -485,28 +493,20 @@ function fnBindTableData(_tbdData) {
         $("#ordersList tbody").append(strHTML);
 
     } else {
-        var counter = 0;
-        var sum = 0;
         $.each(_tbdData, function (index, b) {
-            counter++;
-            sum += b.amount;
+
             var strHTML = '<tr>';
             strHTML += '    <td>' + b.BranchName + '</td>';
             strHTML += '    <td>' + b.OrderNumber + '<br  /><i class="fa fa-calendar"></i>: ' + moment(b.OrdDateTime).format('MM/DD/YYYY h:mm A'); +'</td>';
             strHTML += '    <td>' + b.CustomerName + '<br  /><i class="fa fa-phone" title="Phone Number"></i>: ' + b.phoneno + '<br  /><i class="fa fa-home" title="Address"></i>:  ' + b.OrdAddress + '</td>';
-            strHTML += '    <td class="text-right">' + b.amount.toFixed(2) + '</td>';
+            strHTML += '    <td>' + b.amount + '</td>';
             strHTML += '    <td>' + b.DriverName + '</td>';
             strHTML += '    <td>' + b.DeliveryStatus + '<br  /><i class="fa fa-clock-o" title="Dispatch Time" ></i>:  ' + b.DespatchTime + '<br  /><i class="fa fa-bell" title="Delivery Time"></i>:  ' + b.DeliveryTime + '</td>';
             strHTML += '    <td>' + b.paidby + '</td>';
             strHTML += '</tr>';
 
             $("#ordersList tbody").append(strHTML);
-
         });
-        $("#ordersList tfoot tr").remove();
-        var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="2"></td></tr>';
-        tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="2"></td></tr>';
-        $("#ordersList tfoot").append(tFooter);
     }
 }
 
@@ -518,7 +518,6 @@ $(document).on("click", "#Search", function () {
     var toDate = localStorage.getItem("toDate1");
     var mobile = $("#txtFilterPhone").val();
     var driverName = $("#txtFilterDriver").val();
-    var branchname = $("#txtFilterbranchname").val();
 
     var whereClause = "";
     if (fromDate != null) {
@@ -532,18 +531,12 @@ $(document).on("click", "#Search", function () {
     if (driverName != "") {
         whereClause += "and  DriverName like '%" + driverName + "%' ";
     }
-
-    if (branchname != "") {
-        whereClause += "and  BranchName = '" + branchname + "' ";
-    }
-
     if (whereClause.length > 0) {
         whereClause = " WHERE " + whereClause.slice(3);
     }
 
     webpos.apGetOrders(whereClause, function (res) {
         _data = JSON.parse(res);
-        dataToGetExcel = _data;
         fnBindTableData(_data);
 
     }, function (res) {
@@ -583,118 +576,3 @@ $('#txtFilterDriver').typeahead({
         $("#Search").click();
     }
 });
-
-$('#txtFilterbranchname').typeahead({
-    hint: true,
-    highlight: true,
-    minLength: 1,
-    source: function (request, response) {
-        webpos.GetBranchInfoByName(request, function (data) {
-            response(data);
-        }, function () {
-
-        });
-    },
-    afterSelect: function (item) {
-        $("#Search").click();
-    }
-});
-
-
-// methods for exporting as csv
-
-$("#btnExport").click(function (e) {
-
-    var _now = new Date();
-    var str = "_" + _now.getDate() + "_" + _now.getMonth() + "_" + _now.getYear();
-
-    $.each(dataToGetExcel, function (indx, obj) { //orderDateTime deliverytime
-        var dd1 = new Date(parseInt(obj.OrdDateTime.substr(6)));
-        dataToGetExcel[indx].OrdDateTime = dd1.toLocaleDateString() + " " + dd1.toLocaleTimeString();
-        delete dataToGetExcel[indx].CusOrdNo;
-        delete dataToGetExcel[indx].bID;
-        delete dataToGetExcel[indx].BranchID;
-        delete dataToGetExcel[indx].WorkStationID;
-        delete dataToGetExcel[indx].OrderID;
-        delete dataToGetExcel[indx].OrderMenuID;
-        delete dataToGetExcel[indx].DriverId;
-        delete dataToGetExcel[indx].DeliverystatusID;
-        delete dataToGetExcel[indx].CustomerID;
-
-    });
-    JSONToCSVConvertor(dataToGetExcel, "Order_Report" + str, true);
-});
-
-
-function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
-    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
-    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
-
-    var CSV = '';
-    //Set Report title in first row or line
-
-    CSV += ReportTitle + '\r\n\n';
-
-    //This condition will generate the Label/Header
-    if (ShowLabel) {
-        var row = "";
-
-        //This loop will extract the label from 1st index of on array
-        for (var index in arrData[0]) {
-
-            //Now convert each value to string and comma-seprated
-            row += index + ',';
-        }
-
-        row = row.slice(0, -1);
-
-        //append Label row with line break
-        CSV += row + '\r\n';
-    }
-
-    //1st loop is to extract each row
-    for (var i = 0; i < arrData.length; i++) {
-        var row = "";
-
-        //2nd loop will extract each column and convert it in string comma-seprated
-        for (var index in arrData[i]) {
-            row += '"' + arrData[i][index] + '",';
-        }
-
-        row.slice(0, row.length - 1);
-
-        //add a line break after each row
-        CSV += row + '\r\n';
-    }
-
-    if (CSV == '') {
-        alert("Invalid data");
-        return;
-    }
-
-    //Generate a file name
-    var fileName = "";
-    //this will remove the blank-spaces from the title and replace it with an underscore
-    fileName += ReportTitle.replace(/ /g, "_");
-
-    //Initialize file format you want csv or xls
-    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
-
-    // Now the little tricky part.
-    // you can use either>> window.open(uri);
-    // but this will not work in some browsers
-    // or you will not get the correct file extension    
-
-    //this trick will generate a temp <a /> tag
-    var link = document.createElement("a");
-    link.href = uri;
-
-    //set the visibility hidden so it will not effect on your web-layout
-    link.style = "visibility:hidden";
-    link.download = fileName + ".csv";
-
-    //this part will append the anchor tag and remove it after automatic click
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
