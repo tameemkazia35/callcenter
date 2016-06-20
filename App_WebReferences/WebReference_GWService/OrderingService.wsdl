@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:i0="http://www.tempuri.org/dsUserInfo.xsd" xmlns:i1="http://www.tempuri.org/dsOrder.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/GWService/OrderingService" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" targetNamespace="http://tempuri.org/GWService/OrderingService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://www.tempuri.org/dsUserInfo.xsd" location="http://25.50.83.186/GWService/OrderingService.asmx?schema=dsUserInfo" />
+  <wsdl:import namespace="http://www.tempuri.org/dsOrder.xsd" location="http://25.50.83.186/GWService/OrderingService.asmx?schema=dsOrder" />
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/GWService/OrderingService">
+      <s:import namespace="http://www.tempuri.org/dsUserInfo.xsd" />
+      <s:import namespace="http://www.w3.org/2001/XMLSchema" />
+      <s:import namespace="http://www.tempuri.org/dsOrder.xsd" />
+      <s:element name="AuthenticateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateUserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://www.tempuri.org/dsUserInfo.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOpenOrders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOpenOrdersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOpenOrdersResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderNumber" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderDetailsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://www.tempuri.org/dsOrder.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="OldTable" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewTable" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateOrderNumberResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoidOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="WorkStationID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TableNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Reason" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EmployeeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoidOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VoidOrderResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomersList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Company" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomersListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCustomersListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetServerTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetServerTimeResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderServerID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="OrderNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Menu" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderServerIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetOrderServerIDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="OrderNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetOrderIDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FamilyName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Company" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OfficePhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OtherPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Near" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Building" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Floor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Appartment" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddCustomerResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FamilyName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Company" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OfficePhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OtherPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Near" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Building" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Floor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Appartment" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateCustomerResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WorkstationID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceMode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="OrderInfo">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://www.tempuri.org/dsOrder.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="Close" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="Settle" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveOrderResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderExist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderNumber" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderType" type="tns:OrderType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="OrderType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Table" />
+          <s:enumeration value="Delivery" />
+          <s:enumeration value="Takeaway" />
+          <s:enumeration value="Table1" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="OrderExistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrderExistResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dsInfo">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://www.tempuri.org/dsOrder.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateOrderInfoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectLock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Branchid" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="orderid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectLockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SelectLockResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Branchid" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="orderid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Type" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateLockResult" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintKitchenOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ws" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintKitchenOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PrintKitchenOrderResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintItemVoidsCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WorkstationID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintItemVoidsCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PrintItemVoidsCheckResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthenticateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthenticateUser" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenOrdersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOpenOrders" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenOrdersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOpenOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateOrderNumber" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateOrderNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoidOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:VoidOrder" />
+  </wsdl:message>
+  <wsdl:message name="VoidOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:VoidOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomersListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomersList" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomersListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomersListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServerTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServerTime" />
+  </wsdl:message>
+  <wsdl:message name="GetServerTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServerTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderServerIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderServerID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderServerIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderServerIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:AddCustomer" />
+  </wsdl:message>
+  <wsdl:message name="AddCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:AddCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveOrder" />
+  </wsdl:message>
+  <wsdl:message name="SaveOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderExistSoapIn">
+    <wsdl:part name="parameters" element="tns:OrderExist" />
+  </wsdl:message>
+  <wsdl:message name="OrderExistSoapOut">
+    <wsdl:part name="parameters" element="tns:OrderExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateOrderInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateOrderInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectLockSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectLock" />
+  </wsdl:message>
+  <wsdl:message name="SelectLockSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectLockResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLockSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateLock" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLockSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateLockResponse" />
+  </wsdl:message>
+  <wsdl:message name="PrintKitchenOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:PrintKitchenOrder" />
+  </wsdl:message>
+  <wsdl:message name="PrintKitchenOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:PrintKitchenOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="PrintItemVoidsCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:PrintItemVoidsCheck" />
+  </wsdl:message>
+  <wsdl:message name="PrintItemVoidsCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:PrintItemVoidsCheckResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OrderingServiceSoap">
+    <wsdl:operation name="AuthenticateUser">
+      <wsdl:input message="tns:AuthenticateUserSoapIn" />
+      <wsdl:output message="tns:AuthenticateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenOrders">
+      <wsdl:input message="tns:GetOpenOrdersSoapIn" />
+      <wsdl:output message="tns:GetOpenOrdersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetails">
+      <wsdl:input message="tns:GetOrderDetailsSoapIn" />
+      <wsdl:output message="tns:GetOrderDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderNumber">
+      <wsdl:input message="tns:UpdateOrderNumberSoapIn" />
+      <wsdl:output message="tns:UpdateOrderNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoidOrder">
+      <wsdl:input message="tns:VoidOrderSoapIn" />
+      <wsdl:output message="tns:VoidOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomersList">
+      <wsdl:input message="tns:GetCustomersListSoapIn" />
+      <wsdl:output message="tns:GetCustomersListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerTime">
+      <wsdl:input message="tns:GetServerTimeSoapIn" />
+      <wsdl:output message="tns:GetServerTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderServerID">
+      <wsdl:input message="tns:GetOrderServerIDSoapIn" />
+      <wsdl:output message="tns:GetOrderServerIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderID">
+      <wsdl:input message="tns:GetOrderIDSoapIn" />
+      <wsdl:output message="tns:GetOrderIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCustomer">
+      <wsdl:input message="tns:AddCustomerSoapIn" />
+      <wsdl:output message="tns:AddCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input message="tns:UpdateCustomerSoapIn" />
+      <wsdl:output message="tns:UpdateCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrder">
+      <wsdl:input message="tns:SaveOrderSoapIn" />
+      <wsdl:output message="tns:SaveOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderExist">
+      <wsdl:input message="tns:OrderExistSoapIn" />
+      <wsdl:output message="tns:OrderExistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderInfo">
+      <wsdl:input message="tns:UpdateOrderInfoSoapIn" />
+      <wsdl:output message="tns:UpdateOrderInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectLock">
+      <wsdl:input message="tns:SelectLockSoapIn" />
+      <wsdl:output message="tns:SelectLockSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLock">
+      <wsdl:input message="tns:UpdateLockSoapIn" />
+      <wsdl:output message="tns:UpdateLockSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintKitchenOrder">
+      <wsdl:input message="tns:PrintKitchenOrderSoapIn" />
+      <wsdl:output message="tns:PrintKitchenOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintItemVoidsCheck">
+      <wsdl:input message="tns:PrintItemVoidsCheckSoapIn" />
+      <wsdl:output message="tns:PrintItemVoidsCheckSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderingServiceSoap" type="tns:OrderingServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthenticateUser">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/AuthenticateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenOrders">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/GetOpenOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetails">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/GetOrderDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderNumber">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/UpdateOrderNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoidOrder">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/VoidOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomersList">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/GetCustomersList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerTime">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/GetServerTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderServerID">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/GetOrderServerID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderID">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/GetOrderID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCustomer">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/AddCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveOrder">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/SaveOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderExist">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/OrderExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderInfo">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/UpdateOrderInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectLock">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/SelectLock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLock">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/UpdateLock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintKitchenOrder">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/PrintKitchenOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintItemVoidsCheck">
+      <soap:operation soapAction="http://tempuri.org/GWService/OrderingService/PrintItemVoidsCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrderingService">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/" />
+    <wsdl:port name="OrderingServiceSoap" binding="tns:OrderingServiceSoap">
+      <soap:address location="http://25.50.83.186/GWService/OrderingService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

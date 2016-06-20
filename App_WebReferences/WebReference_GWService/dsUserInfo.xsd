@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.tempuri.org/dsUserInfo.xsd" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:mstns="http://www.tempuri.org/dsUserInfo.xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://www.tempuri.org/dsUserInfo.xsd" id="dsUserInfo" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element msdata:IsDataSet="true" name="dsUserInfo">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="PDA_SEL_ItemGroups">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="CategoryID" type="xs:int" />
+              <xs:element name="Category" type="xs:string" />
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="GroupID" type="xs:int" />
+              <xs:element name="GroupName" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="POS_SEL_VoidReasons">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="VoidReasonID" type="xs:int" />
+              <xs:element name="Void_x0020_Reason" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PDA_SEL_Screens">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="SalesItemID" type="xs:int" />
+              <xs:element minOccurs="0" name="MenuDescription" type="xs:string" />
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="CategoryID" type="xs:int" />
+              <xs:element name="Category" type="xs:string" />
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="GroupID" type="xs:int" />
+              <xs:element name="GroupName" type="xs:string" />
+              <xs:element minOccurs="0" name="PriceMode1" type="xs:float" />
+              <xs:element minOccurs="0" name="PriceMode2" type="xs:float" />
+              <xs:element minOccurs="0" name="PriceMode3" type="xs:float" />
+              <xs:element minOccurs="0" name="PriceMode4" type="xs:float" />
+              <xs:element minOccurs="0" name="FunctionID" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier1" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier2" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier3" type="xs:int" />
+              <xs:element minOccurs="0" name="MeterCounter" type="xs:float" />
+              <xs:element minOccurs="0" name="ScreenColor" type="xs:int" />
+              <xs:element minOccurs="0" name="Formula" type="xs:boolean" />
+              <xs:element minOccurs="0" name="Modifier1Remarks" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier2Remarks" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier3Remarks" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PDA_SEL_EmployeeConfigurationSettings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EmployeeName" type="xs:string" />
+              <xs:element name="BranchID" type="xs:int" />
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="EmployeeID" type="xs:int" />
+              <xs:element name="MenuID" type="xs:int" />
+              <xs:element name="KeyID" type="xs:string" />
+              <xs:element name="FunctionID" type="xs:int" />
+              <xs:element name="ScreenID" type="xs:int" />
+              <xs:element name="TimeModeID" type="xs:int" />
+              <xs:element name="Mode" type="xs:string" />
+              <xs:element minOccurs="0" name="Starts" type="xs:string" />
+              <xs:element minOccurs="0" name="Ends" type="xs:string" />
+              <xs:element name="PriceModeID" type="xs:int" />
+              <xs:element name="EmployeeFunction" type="xs:string" />
+              <xs:element name="OpenTablesAccess" type="xs:boolean" />
+              <xs:element name="TableTransfer" type="xs:boolean" />
+              <xs:element name="VoidTable" type="xs:boolean" />
+              <xs:element name="AddOnPrintedCheck" type="xs:boolean" />
+              <xs:element name="Del" type="xs:boolean" />
+              <xs:element name="Void" type="xs:boolean" />
+              <xs:element name="SellForAnotherServer" type="xs:boolean" />
+              <xs:element name="FastCashEntry" type="xs:boolean" />
+              <xs:element msdata:ReadOnly="true" minOccurs="0" name="Tax1" type="xs:float" />
+              <xs:element msdata:ReadOnly="true" minOccurs="0" name="Tax2" type="xs:float" />
+              <xs:element msdata:ReadOnly="true" minOccurs="0" name="Tax3" type="xs:float" />
+              <xs:element msdata:ReadOnly="true" minOccurs="0" name="Service" type="xs:float" />
+              <xs:element name="Menu" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PDA_SEL_ScreenRemarks">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="ID" type="xs:int" />
+              <xs:element name="PDAGroupLoc" type="xs:int" />
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="SalesItemID" type="xs:int" />
+              <xs:element minOccurs="0" name="MenuDescription" type="xs:string" />
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="CategoryID" type="xs:int" />
+              <xs:element name="Category" type="xs:string" />
+              <xs:element msdata:ReadOnly="true" msdata:AutoIncrement="true" name="GroupID" type="xs:int" />
+              <xs:element name="GroupName" type="xs:string" />
+              <xs:element minOccurs="0" name="PriceMode1" type="xs:float" />
+              <xs:element minOccurs="0" name="PriceMode2" type="xs:float" />
+              <xs:element minOccurs="0" name="PriceMode3" type="xs:float" />
+              <xs:element minOccurs="0" name="PriceMode4" type="xs:float" />
+              <xs:element minOccurs="0" name="FunctionID" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier1" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier2" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier3" type="xs:int" />
+              <xs:element minOccurs="0" name="MeterCounter" type="xs:float" />
+              <xs:element minOccurs="0" name="ScreenColor" type="xs:int" />
+              <xs:element minOccurs="0" name="Formula" type="xs:boolean" />
+              <xs:element minOccurs="0" name="Modifier1Remarks" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier2Remarks" type="xs:int" />
+              <xs:element minOccurs="0" name="Modifier3Remarks" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique msdata:PrimaryKey="true" name="Constraint1">
+      <xs:selector xpath=".//mstns:POS_SEL_VoidReasons" />
+      <xs:field xpath="mstns:VoidReasonID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

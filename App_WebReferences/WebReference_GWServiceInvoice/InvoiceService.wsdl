@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx">
+      <s:element name="PrintInvoice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ws" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintInvoiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PrintInvoiceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintKitchenOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintKitchenOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PrintKitchenOrderResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="HelloWorldResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PrintInvoiceSoapIn">
+    <wsdl:part name="parameters" element="tns:PrintInvoice" />
+  </wsdl:message>
+  <wsdl:message name="PrintInvoiceSoapOut">
+    <wsdl:part name="parameters" element="tns:PrintInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="PrintKitchenOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:PrintKitchenOrder" />
+  </wsdl:message>
+  <wsdl:message name="PrintKitchenOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:PrintKitchenOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:portType name="InvoiceServiceSoap">
+    <wsdl:operation name="PrintInvoice">
+      <wsdl:input message="tns:PrintInvoiceSoapIn" />
+      <wsdl:output message="tns:PrintInvoiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintKitchenOrder">
+      <wsdl:input message="tns:PrintKitchenOrderSoapIn" />
+      <wsdl:output message="tns:PrintKitchenOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InvoiceServiceSoap" type="tns:InvoiceServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PrintInvoice">
+      <soap:operation soapAction="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx/PrintInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintKitchenOrder">
+      <soap:operation soapAction="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx/PrintKitchenOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InvoiceServiceSoap12" type="tns:InvoiceServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PrintInvoice">
+      <soap12:operation soapAction="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx/PrintInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintKitchenOrder">
+      <soap12:operation soapAction="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx/PrintKitchenOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/GWSERVICEINVOICE/InvoiceService.asmx/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InvoiceService">
+    <wsdl:port name="InvoiceServiceSoap" binding="tns:InvoiceServiceSoap">
+      <soap:address location="http://25.50.83.186/GWSERVICEINVOICE/InvoiceService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InvoiceServiceSoap12" binding="tns:InvoiceServiceSoap12">
+      <soap12:address location="http://25.50.83.186/GWSERVICEINVOICE/InvoiceService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

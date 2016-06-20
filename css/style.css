@@ -1,0 +1,419 @@
+html, body
+{
+    height: 100%;
+}
+body
+{
+    line-height: 1.5;
+}
+
+/* Table Creating */
+.btn-flat
+{
+    border-radius: 0px !important;
+}
+.top-bar
+{
+    background-color: rgba(24,93,135,1);
+    color: #fff;
+    padding: 10px 0px;
+}
+
+.top-bar a
+{
+    color: #fff;
+}
+
+.tables-list
+{
+    height: 86vh;
+    padding: 6px 20px 20px 20px;
+    overflow: auto;
+    border-right: 1px solid #BBBBBB;
+}
+
+.table-box
+{
+    background-color: #f9f9f9;
+    padding: 4px;
+    color: #000;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px #DADADA;
+    margin-bottom: 20px;
+}
+
+.table-box.open
+{
+    background-color: #f9f9f9;
+    color: #000;
+}
+
+.table-box.others
+{
+    background-color: #D00000;
+    color: #fff;
+}
+
+.table-box.lock
+{
+    background-color: red;
+    color: #fff;
+}
+.table-box.printed
+{
+    background-color: blue;
+    color: #fff;
+}
+.table-box.self
+{
+    background-color: green;
+    color: #fff;
+}
+
+.table-box.busy footer a, .table-box.done footer a
+{
+    color: #fff;
+}
+
+.table-no
+{
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    opacity: .5;
+    font-size: 2em;
+    font-weight: bolder;
+    font-family: 'Arial Black' , Verdana, Sans-Serif;
+}
+.table-no:after
+{
+    font-family: 'FontAwesome';
+    content: '\f0f5';
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    opacity: .4;
+}
+dl
+{
+    margin-bottom: 0px;
+}
+dl dt
+{
+    float: left;
+    font-weight: bold;
+    width: 72px;
+}
+
+dl dd:before
+{
+    content: ':';
+    padding-right: 10px;
+}
+
+dl dd
+{
+    margin: 2px 0;
+}
+
+.modal-backdrop.fade.in
+{
+    z-index: 0;
+}
+
+.new-table, .new-no-customers
+{
+    margin-right: 4px;
+}
+
+/* Punching Items */
+.top-bar
+{
+    background-color: rgba(24,93,135,1);
+    color: #fff;
+    padding: 10px 0px;
+}
+
+.top-bar a
+{
+    color: #fff;
+}
+
+#orderPanel
+{
+    display: flex;
+    display: -webkit-flex;
+    height: 86%;
+}
+
+#leftPanel
+{
+    width: 45%;
+    height: 100%;
+    padding-left: 4px;
+    border-right: 1px solid #d9d9d9;
+    background-color: #f6f6f6;
+}
+
+#leftPanel .top
+{
+    height: 84%;
+    overflow: auto;
+}
+
+.qty-controller
+{
+    width: 140px;
+}
+
+#leftPanel .mid
+{
+    border-top: 1px solid #d9d9d9;
+    height: 10%;
+}
+
+#leftPanel .bottom
+{
+    border-top: 1px solid #d9d9d9;
+    height: auto;
+}
+
+#leftPanel .bottom .form-group
+{
+    margin-bottom: 0px;
+}
+#leftPanel .bottom .form-control, #leftPanel .bottom .btn
+{
+    border-radius: 0px;
+}
+footer .btn
+{
+    padding: 20px 2px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 0px !important;
+}
+
+.table
+{
+    margin-bottom: 0px;
+    font-size: 20px;
+}
+
+.table th, .table td
+{
+    padding: 2px !important;
+}
+
+.breadcrumb
+{
+    margin-bottom: 0px;
+}
+
+#groupList, #itemsList, #remarksList
+{
+    display: flex;
+    flex-wrap: wrap;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    max-height: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 160px;
+    margin-bottom: 160px;
+}
+
+#groupList > a, #itemsList > a, #remarksList > a
+{
+    width: 25%;
+    height: 80px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: -webkit-flex;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    background: #3E3E3E; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#3E3E3E, #080808); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#3E3E3E, #080808); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#3E3E3E, #080808); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#3E3E3E, #080808); /* Standard syntax */
+    color: #fff;
+    cursor: pointer;
+    padding: 4px;
+    text-transform: uppercase;
+}
+
+
+#groupList > a:hover, #groupList > a:focus, #itemsList > a:hover, #itemsList > a:focus, #remarksList > a:hover, #remarksList > a:focus
+{
+    background: #3E3E3E; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#080808, #3E3E3E); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#080808, #3E3E3E); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#080808, #3E3E3E); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#080808, #3E3E3E); /* Standard syntax */
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.modal-body
+{
+    max-height: 75vh;
+    overflow: auto;
+}
+
+.modal-backdrop.fade.in
+{
+    z-index: -1;
+}
+
+#itemAdd h3
+{
+    padding: 0px;
+    margin: 0px;
+}
+
+.list-group-item
+{
+    padding: 0px 15px;
+}
+
+.list-group-item input[type=radio] {
+    margin: 0px 12px 0 0 !important;
+}
+
+.item-remarks
+{
+    display: block;
+}
+.tableno
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.preloader
+{
+    background-color: rgba(0,0,0, 0.8);
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    font-size: 200%;
+    padding-top: 24%;
+    text-align: center;
+    color: #fff;
+    z-index: 9999;
+}
+
+div[aria-labelledby="modifierModal"] label
+{
+    font-size: 18px;
+}
+
+input[name='modifiers']
+{
+    transform: scale(2);
+}
+
+
+.numpad-list
+{
+    display: flex;
+    flex-wrap: wrap;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    margin: 0 -4px -4px 0;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+.numpad-list li
+{
+    height: 100px;
+    border-right: 1px solid #3e3e3e;
+    border-bottom: 1px solid #6B6B6B;
+    background: #3E3E3E; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#3E3E3E, #080808); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#3E3E3E, #080808); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#3E3E3E, #080808); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#3E3E3E, #080808); /* Standard syntax */
+    color: #fff;
+    flex: 1 0 26%;
+    -webkit-flex: 1 0 26%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.numpad-list li span
+{
+    display: block;
+    background-color: transparent;
+    color: #fff;
+}
+
+
+
+.numpad-list li:hover
+{
+    background: #3E3E3E; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#080808, #3E3E3E); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#080808, #3E3E3E); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#080808, #3E3E3E); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#080808, #3E3E3E); /* Standard syntax */
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#foPrice
+{
+    font-size: 24px;
+}
+
+#paymentTypeList li
+{
+    padding: 0px;    
+}
+
+#paymentTypeList .row div[class*='col-']
+{
+    padding-right: 0px;
+}
+#paymentTypeList .row div[class*='col-']:last-child
+{
+    padding-left: 0px;
+}
+
+#paymentTypeList input
+{
+    border-radius: 0px!important;    
+}
+
+#branchList.list-group
+{
+        margin-left: 15px;
+    margin-right: 15px
+    }
+    
+    #branchList.list-group .list-group-item
+    {
+        padding:12px 15px;
+        } 
+        
+.btn.text-left{text-align:left !important;}  
+
+      

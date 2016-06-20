@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="torder" targetNamespace="http://tempuri.org/torder.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/torder.xsd" xmlns:mstns="http://tempuri.org/torder.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="torder" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="POS_SEL_OrderDetailsReport">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="TempOrderDetailID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="BranchID" type="xs:int" />
+							<xs:element name="WorkstationID" type="xs:int" />
+							<xs:element name="OrderedBy" type="xs:int" />
+							<xs:element name="OrderID" type="xs:int" />
+							<xs:element name="ItemID" type="xs:int" />
+							<xs:element name="Quantity" type="xs:float" />
+							<xs:element name="UsedPrice" type="xs:float" />
+							<xs:element name="CustomerNumber" type="xs:int" />
+							<xs:element name="AffectedItem" type="xs:int" />
+							<xs:element name="VoidReasonID" type="xs:int" />
+							<xs:element name="Status" type="xs:string" />
+							<xs:element name="OrderingTime" type="xs:dateTime" />
+							<xs:element name="Without" type="xs:unsignedByte" />
+							<xs:element name="ItemRemark" type="xs:string" minOccurs="0" />
+							<xs:element name="Description" type="xs:string" minOccurs="0" />
+							<xs:element name="Menu" type="xs:int" />
+							<xs:element name="TableNumber" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+							<xs:element name="NumberOfCustomers" type="xs:int" />
+							<xs:element name="KitchenRemark" type="xs:string" minOccurs="0" />
+							<xs:element name="EmployeeName" type="xs:string" />
+							<xs:element name="PhysicalPrinter" type="xs:string" />
+							<xs:element name="LogicalPrinter" type="xs:string" />
+							<xs:element name="Workstation" type="xs:string" minOccurs="0" />
+							<xs:element name="CustomerName" type="xs:string" minOccurs="0" />
+							<xs:element name="FunctionID" type="xs:int" minOccurs="0" />
+							<xs:element name="make" type="xs:string" minOccurs="0" />
+							<xs:element name="model" type="xs:string" minOccurs="0" />
+							<xs:element name="plateno" type="xs:string" minOccurs="0" />
+							<xs:element name="color" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="torderKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:POS_SEL_OrderDetailsReport" />
+			<xs:field xpath="mstns:TempOrderDetailID" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

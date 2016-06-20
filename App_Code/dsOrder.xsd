@@ -1,0 +1,60 @@
+<?xml version="1.0" standalone="yes" ?>
+<xs:schema id="dsOrder" targetNamespace="http://www.tempuri.org/dsOrder.xsd" xmlns:mstns="http://www.tempuri.org/dsOrder.xsd"
+	xmlns="http://www.tempuri.org/dsOrder.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+	<xs:element name="dsOrder" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="PDA_SEL_OrderDetails">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="MenuDescription" type="xs:string" minOccurs="0" />
+							<xs:element name="FunctionID" type="xs:int" minOccurs="0" />
+							<xs:element name="OrderDetailID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="SalesItemID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="Quantity" type="xs:float" />
+							<xs:element name="UsedPrice" type="xs:float" />
+							<xs:element name="CustomerNumber" type="xs:int" minOccurs="0" />
+							<xs:element name="Status" type="xs:string" />
+							<xs:element name="AffectedItem" type="xs:int" />
+							<xs:element name="VoidReasonID" type="xs:int" />
+							<xs:element name="OrderbyEmployeeId" type="xs:int" minOccurs="0" />
+							<xs:element name="ItemRemark" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="PDA_SEL_OpenOrderInfo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="BranchID" type="xs:int" />
+							<xs:element name="WorkStationID" type="xs:int" minOccurs="0" />
+							<xs:element name="OrderMenuID" type="xs:int" />
+							<xs:element name="OrderNumber" type="xs:float" />
+							<xs:element name="NumberOfCustomers" type="xs:int" />
+							<xs:element name="CustomerID" type="xs:int" minOccurs="0" />
+							<xs:element name="OpenedBy" type="xs:int" />
+							<xs:element name="ClosedBy" type="xs:int" minOccurs="0" />
+							<xs:element name="OpeningTime" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="ClosingTime" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Status" type="xs:int" />
+							<xs:element name="CheckIsPrinted" type="xs:boolean" />
+							<xs:element name="InvoiceNumber" type="xs:string" minOccurs="0" />
+							<xs:element name="InvoiceRemark" type="xs:string" minOccurs="0" />
+							<xs:element name="KitchenRemark" type="xs:string" minOccurs="0" />
+							<xs:element name="Voided" type="xs:boolean" />
+							<xs:element name="VoidReasonID" type="xs:int" minOccurs="0" />
+							<xs:element name="RevMenuID" type="xs:int" minOccurs="0" />
+							<xs:element name="TotalPrice" type="xs:float" minOccurs="0" />
+							<xs:element name="Customer" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+							<xs:element name="Server" type="xs:string" minOccurs="0" />
+							<xs:element name="Driver" type="xs:string" minOccurs="0" />
+							<xs:element name="DeliveryStatus" type="xs:int" minOccurs="0" />
+							<xs:element name="DeliveryTime" type="xs:dateTime" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
