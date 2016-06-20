@@ -224,13 +224,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"> Order History</h4>
+        <h4 class="modal-title"> Order History</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <a data-toggle="collapse" href="#collapseExample"><i class="fa fa-filter"></i> | Filter</a>
-                            <button type="button" id="btnExport" class="btn btn-primary pull-right" >Export to Excel <i class="fa fa-download"></i></button>
                         </div>
                     </div>
                     <div class="row collapse well" id="collapseExample">
@@ -252,13 +251,8 @@
                                <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-car fa-fw"></i></span>
                                     <input class="form-control" type="text" placeholder="Driver Name" id="txtFilterDriver"  />
-                               </div>                                
-                            </div>
-                            <div class="form-group col-md-3">
-                               <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-building fa-fw"></i></span>
-                                    <input class="form-control" type="text" placeholder="Branch Name" id="txtFilterbranchname"  />
-                               </div>                                
+                               </div>
+                                
                             </div>
                             <div class="form-group col-md-3">
                            
@@ -269,7 +263,7 @@
                        
                     </div>
                     <div class="row">
-                        <div class="col-lg-12 table-responsive" >
+                        <div class="col-lg-12 table-responsive">
                             <table class="table" id="ordersList">
                                 <thead>
                                     <tr>
@@ -282,7 +276,7 @@
                                         <th>
                                             Customer
                                         </th>
-                                        <th class="text-right">
+                                        <th>
                                             Amount
                                         </th>
                                         <th>
@@ -298,9 +292,8 @@
                                 </thead>
                                 <tbody>
                                 </tbody>
-                                <tfoot>
-                                <//tfoot>
                             </table>
+
                         </div>
                         <p>&nbsp;</p>
                     </div>

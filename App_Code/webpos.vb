@@ -768,19 +768,6 @@ Public Class webpos
         Return driver.ToArray()
     End Function
 
-    <WebMethod()> _
-    Public Function GetBranchInfoByName(ByVal prefix As String) As String()
-        Dim driver As New List(Of String)()
-        con.Open()
-        Using sdr As SqlDataReader = SqlHelper.ExecuteReader(con, CommandType.Text, "SELECT bName FROM tbl_Branch WHERE bName like '" + prefix + "%';")
-            While sdr.Read()
-                driver.Add(sdr("bName"))
-            End While
-        End Using
-        con.Close()
-        Return driver.ToArray()
-    End Function
-
    
 
     <WebMethod()> _
