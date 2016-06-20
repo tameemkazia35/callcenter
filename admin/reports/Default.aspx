@@ -12,6 +12,7 @@
      <div class="row">
         <div class="col-lg-12">
             <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-filter"></i> | Filter</a>
+            <button type="button" id="btnExport" class="btn btn-primary " >Export to Excel <i class="fa fa-download"></i></button>
         </div>
     </div>
    
@@ -38,6 +39,12 @@
                     autofocus autocomplete="off" required />
             </div>
             <div class="form-group">
+                <label>
+                    Branch Name:</label>
+                <input class="form-control" type="text" placeholder="Branch Name" id="branchname"
+                    autofocus autocomplete="off" required />
+            </div>
+            <div class="form-group">
                 <button type="button" class="btn btn-primary" id="Search">
                     Search <i class="fa fa-search"></i></button> |  <button type="button" class="btn btn-default" id="btnSave" onclick="fnLoad()">
                     View All <i class="fa fa-file"></i></button>
@@ -46,35 +53,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 table-responsive">
-            <table class="table" id="branches">
-                <thead>
-                    <tr>
-                        <th>
-                            Branch Name
-                        </th>
-                        <th>
-                            Order
-                        </th>
-                        <th>
-                            Customer
-                        </th>
-                        <th>
-                            Amount
-                        </th>
-                        <th>
-                            Driver Name
-                        </th>
-                        <th>
-                            Delivery Status
-                        </th>
-                        <th>
-                            Paid by
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
+        
+        <div class="col-lg-12 table-responsive" id="ExportId">
+            <table class="table" id="branches">                
             </table>
         </div>
     </div>
@@ -91,6 +72,7 @@
     <script src="../../js/daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <script>
 
+        var dataToGetExcel;
 //--------------------------- method to build range picker -------------------------------------------------------------------       
 
         $('#daterange-btn').daterangepicker(
@@ -129,12 +111,15 @@
 
         var _data = null;
         function fnLoad() {
+            var fromDate = localStorage.getItem("fromDate1");
+            var toDate = localStorage.getItem("toDate1");
             var whereClause = "";
             if (fromDate != null) {
                 whereClause += " where OrdDateTime between '" + fromDate + " 00:00:00.000' and  '" + toDate + " 23:59:59.999' ";
             }
             webpos.apGetOrders(whereClause, function (res) {
                 _data = JSON.parse(res);
+                dataToGetExcel = _data;
                 fnBindTableData(_data);
 
             }, function (res) {
@@ -150,21 +135,30 @@
 
         function fnBindTableData(_tbdData) {
 
-            $("#branches tbody tr").remove();
+            $("#branches tr").remove();
+            var tableHeader = '<tr><th>Branch Name</th><th>Order</th><th>Customer</th><th class="text-right"></th><th>Driver Name</th><th>Delivery Status</th><th>Paid by</th></tr>';
+            $("#branches").append(tableHeader);
+            var counter = 0;
+            var sum = 0;
             $.each(_tbdData, function (index, b) {
-
+                counter++;
+                sum += b.amount;
                 var strHTML = '<tr>';
                 strHTML += '    <td>' + b.BranchName + '</td>';
                 strHTML += '    <td>' + b.OrderNumber + '<br  /><i class="fa fa-calendar"></i>: ' + moment(b.OrdDateTime).format('MM/DD/YYYY h:mm A') + '</td>';
                 strHTML += '    <td>' + b.CustomerName + '<br  /><i class="fa fa-phone" title="Phone Number"></i>: ' + b.phoneno + '<br  /><i class="fa fa-home" title="Address"></i>:  ' + b.OrdAddress + '</td>';
-                strHTML += '    <td>' + b.amount + '</td>';
+                strHTML += '    <td class="text-right">' + b.amount.toFixed(2) + '</td>';
                 strHTML += '    <td>' + b.DriverName + '</td>';
                 strHTML += '    <td>' + b.DeliveryStatus + '<br  /><i class="fa fa-clock-o" title="Dispatch Time" ></i>:  ' + b.DespatchTime + '<br  /><i class="fa fa-bell" title="Delivery Time"></i>:  ' + b.DeliveryTime + '</td>';
                 strHTML += '    <td>' + b.paidby + '</td>';
                 strHTML += '</tr>';
 
-                $("#branches tbody").append(strHTML);
+                $("#branches").append(strHTML);
             });
+
+//            var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="2"></td></tr>';
+//            tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="2"></td></tr>';
+//            $("#branches").append(tFooter);
 
         }
 
@@ -176,6 +170,7 @@
             var toDate = localStorage.getItem("toDate1");
             var mobile = $("#mobileno").val();
             var driverName = $("#drivername").val();
+            var branchname = $('#branchname').val();
 
             var whereClause = "";
             if (fromDate != null) {
@@ -189,12 +184,16 @@
             if (driverName != "") {
                 whereClause += "and  DriverName = '" + driverName + "' ";
             }
-            if (whereClause.length > 0) {
-                whereClause = " WHERE "+ whereClause.slice(3);    
+            if (branchname != "") {
+                whereClause += "and  BranchName = '" + branchname + "' ";
             }
-            
+            if (whereClause.length > 0) {
+                whereClause = " WHERE " + whereClause.slice(3);
+            }
+
             webpos.apGetOrders(whereClause, function (res) {
                 _data = JSON.parse(res);
+                dataToGetExcel = _data;
                 fnBindTableData(_data);
 
             }, function (res) {
@@ -217,6 +216,7 @@
                 });
             },
             afterSelect: function (item) {
+                $("#mobileno").val(item.split('|')[0].trim());
                 $("#Search").click();
             }
         });
@@ -236,6 +236,119 @@
                 $("#Search").click();
             }
         });
+
+
+        $('#branchname').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1,
+            source: function (request, response) {
+                webpos.GetBranchInfoByName(request, function (data) {
+                    response(data);
+                }, function () {
+
+                });
+            },
+            afterSelect: function (item) {
+                $("#Search").click();
+            }
+        });
+
+        $("#btnExport").click(function (e) {
+           
+            var _now = new Date();
+            var str = "_" + _now.getDate() + "_" + _now.getMonth() + "_" + _now.getYear();
+
+            $.each(dataToGetExcel, function (indx, obj) { //orderDateTime deliverytime
+                var dd1 = new Date(parseInt(obj.OrdDateTime.substr(6)));
+                dataToGetExcel[indx].OrdDateTime = dd1.toLocaleDateString() + " " + dd1.toLocaleTimeString();
+                delete dataToGetExcel[indx].CusOrdNo;
+                delete dataToGetExcel[indx].bID;
+                delete dataToGetExcel[indx].BranchID;
+                delete dataToGetExcel[indx].WorkStationID;
+                delete dataToGetExcel[indx].OrderID;
+                delete dataToGetExcel[indx].OrderMenuID;
+                delete dataToGetExcel[indx].DriverId;
+                delete dataToGetExcel[indx].DeliverystatusID;
+                delete dataToGetExcel[indx].CustomerID;
+
+            });            
+            JSONToCSVConvertor(dataToGetExcel, "Order_Report" + str, true);
+        });
+
+
+        function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+            //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+            var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+
+            var CSV = '';
+            //Set Report title in first row or line
+
+            CSV += ReportTitle + '\r\n\n';
+
+            //This condition will generate the Label/Header
+            if (ShowLabel) {
+                var row = "";
+
+                //This loop will extract the label from 1st index of on array
+                for (var index in arrData[0]) {
+
+                    //Now convert each value to string and comma-seprated
+                    row += index + ',';
+                }
+
+                row = row.slice(0, -1);
+
+                //append Label row with line break
+                CSV += row + '\r\n';
+            }
+
+            //1st loop is to extract each row
+            for (var i = 0; i < arrData.length; i++) {
+                var row = "";
+
+                //2nd loop will extract each column and convert it in string comma-seprated
+                for (var index in arrData[i]) {
+                    row += '"' + arrData[i][index] + '",';
+                }
+
+                row.slice(0, row.length - 1);
+
+                //add a line break after each row
+                CSV += row + '\r\n';
+            }
+
+            if (CSV == '') {
+                alert("Invalid data");
+                return;
+            }
+
+            //Generate a file name
+            var fileName = "";
+            //this will remove the blank-spaces from the title and replace it with an underscore
+            fileName += ReportTitle.replace(/ /g, "_");
+
+            //Initialize file format you want csv or xls
+            var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+
+            // Now the little tricky part.
+            // you can use either>> window.open(uri);
+            // but this will not work in some browsers
+            // or you will not get the correct file extension    
+
+            //this trick will generate a temp <a /> tag
+            var link = document.createElement("a");
+            link.href = uri;
+
+            //set the visibility hidden so it will not effect on your web-layout
+            link.style = "visibility:hidden";
+            link.download = fileName + ".csv";
+
+            //this part will append the anchor tag and remove it after automatic click
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
 
     </script>
 </asp:Content>
