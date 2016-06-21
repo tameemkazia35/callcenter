@@ -513,11 +513,13 @@ function fnBindTableData(_tbdData) {
             $("#ordersList tbody").append(strHTML);
 
         });
-        $("#ordersList tfoot tr").remove();
-        var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="3"></td></tr>';
-        tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="3"></td></tr>';
-        $("#ordersList tfoot").append(tFooter);
+
     }
+
+    $("#ordersList tfoot tr").remove();
+    var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="3"></td></tr>';
+    tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="3"></td></tr>';
+    $("#ordersList tfoot").append(tFooter);
 }
 
 //-----------------------method to get Orders base on Search --------------------------------------------------------

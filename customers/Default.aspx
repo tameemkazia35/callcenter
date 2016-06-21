@@ -229,7 +229,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <a data-toggle="collapse" href="#collapseExample"><i class="fa fa-filter"></i> | Filter</a>
+                           <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-filter"></i> | Filter</a>
                             <button type="button" id="btnExport" class="btn btn-primary pull-right" >Export to Excel <i class="fa fa-download"></i></button>
                         </div>
                     </div>
