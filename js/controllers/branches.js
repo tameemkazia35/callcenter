@@ -130,7 +130,7 @@ $(document).on("click", "#btnTakeOrder", function (e) {
         if ($("#mobileno").val().replace("|", "").trim().length === 0) {
             _flag = false;
             bootbox.alert("Please enter mobile number", function () { setTimeout(function () { $("#mobileno").focus(); }, 800); });
-        } else if (_custID.length === 0) {
+        } else if ($("#firstname").val().length === 0) {
             _flag = false;
             bootbox.alert("Please enter customer name", function () { setTimeout(function () { $("#firstname").focus(); }, 800); });
         }
@@ -142,7 +142,7 @@ $(document).on("click", "#btnTakeOrder", function (e) {
             webpos.SaveCustomerInfo(customerInfo, function (res) {
         
             $("#hfCustID").val(res.split(":")[0]);
-            localStorage.setItem("CustID", res.split(":")[1]);
+                localStorage.setItem("CustID", res.split(":")[1]);
         
                 $("#hfCustID").val(res.split(":")[0]);
                 localStorage.setItem("CustID", res.split(":")[1]);

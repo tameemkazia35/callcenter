@@ -38,8 +38,8 @@ $(document).ready(function () {
 
         webpos.GetPaidByType(_cBranchID, localStorage.getItem("orderId"), localStorage.getItem("cCustID"), function (response) {
             if (response == null || response.trim().length === 0) {
-                $("#ddlPayType").val("CASH DHS");
-            }else if (response.length > 0)
+                $("#ddlPayType").prop("selectedIndex", 0);
+            } else if (response.length > 0)
                 $("#ddlPayType").val(response);
         }, function (response) { console.log(response) })
 
@@ -1013,6 +1013,7 @@ $('#searchItems').typeahead({
     highlight: true,
     minLength: 1,
     source: function (request, response) {
+        $('#btnMainScreen').click();
         webpos.SearchItem(localStorage.getItem("cBranchID"), request, function (data) {
              menuItems = [];
              items = {};
@@ -1026,6 +1027,7 @@ $('#searchItems').typeahead({
             console.log(data);
         });
     },
+   items: 12,
     afterSelect: function (item) {
         
         $('a[data-newitemid="' + items[item].GroupID + '"]').click();
@@ -1041,5 +1043,6 @@ $('#searchItems').typeahead({
     }
 });
 
-
-
+$(document).ready(function () {
+    $("#ddlPayType").prop("selectedIndex", 0);
+});

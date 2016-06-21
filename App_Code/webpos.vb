@@ -855,7 +855,9 @@ Public Class webpos
         SqlHelper.ExecuteNonQuery(con, CommandType.Text, "UPDATE tbl_Customers SET custBID='" + custBID.ToString() + "' WHERE cMobileNo='" + dicCust("cMobileNo") + "'")
 
         If dicCust("custID").ToString().Length.Equals(0) Then
-            dicCust("custID") = SqlHelper.ExecuteScalar(con, CommandType.Text, "SELECT custID FROM tbl_Customers WHERE custBID='" + custBID.ToString() + "' AND cMobileNo='" + dicCust("cMobileNo") + "'")
+            dicCust("custID") = SqlHelper.ExecuteScalar(con, CommandType.Text, "SELECT custID FROM tbl_Customers WHERE custBID='" + custBID.ToString() + "' AND cMobileNo='" + dicCust("cMobileNo") + "';")
+        Else
+            dicCust("custID") = SqlHelper.ExecuteScalar(con, CommandType.Text, "SELECT custID FROM tbl_Customers WHERE custBID='" + custBID.ToString() + "' AND cMobileNo='" + dicCust("cMobileNo") + "'  and cBranchID='" + dicCust("cLastSelectedBranch") + "';")
         End If
 
         Return dicCust("custID") & ":" & custBID
