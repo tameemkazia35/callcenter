@@ -485,6 +485,8 @@ $(document).ready(function () {
 function fnBindTableData(_tbdData) {
 
     $("#ordersList tbody tr").remove();
+    var counter = 0;
+    var sum = 0;
     if (_tbdData.length == 0) {
 
         var strHTML = '<tr>';
@@ -494,8 +496,7 @@ function fnBindTableData(_tbdData) {
         $("#ordersList tbody").append(strHTML);
 
     } else {
-        var counter = 0;
-        var sum = 0;
+       
         $.each(_tbdData, function (index, b) {
             counter++;
             sum += b.amount;
@@ -513,8 +514,8 @@ function fnBindTableData(_tbdData) {
 
         });
         $("#ordersList tfoot tr").remove();
-        var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="2"></td></tr>';
-        tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="2"></td></tr>';
+        var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="3"></td></tr>';
+        tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="3"></td></tr>';
         $("#ordersList tfoot").append(tFooter);
     }
 }

@@ -156,9 +156,9 @@
                 $("#branches").append(strHTML);
             });
 
-            //            var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="2"></td></tr>';
-            //            tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="2"></td></tr>';
-            //            $("#branches").append(tFooter);
+                     var tFooter = '<tr><td colspan="3" class="text-right"><strong>Total Amount: </strong></td><td class="text-right"><strong>' + sum.toFixed(2) + '</td><td colspan="3"></td></tr>';
+                     tFooter += '<tr><td colspan="3" class="text-right"><strong>Total Orders: </strong></td><td class="text-right"><strong>' + counter + '</strong></td><td colspan="3"></td></tr>';
+                     $("#branches").append(tFooter);
 
         }
 
